@@ -1,7 +1,8 @@
 {
   "name": "ntalk",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Node talk - Agenda de contatos",
+  "author": "Marco Antonio P.",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
