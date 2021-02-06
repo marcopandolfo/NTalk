@@ -4,6 +4,7 @@ const consign = require("consign");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const methodOverride = require("method-override");
 const app = express();
 
 app.set("views", path.join(__dirname, "views"));
@@ -18,6 +19,7 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
 consign({}).include("models").then("controllers").then("routes").into(app);

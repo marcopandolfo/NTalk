@@ -1,9 +1,44 @@
 <% include ../header %>
-  <header>47 5.2. Controlando as sessões</header>
-    <h2>Ntalk - Agenda de contatos</h2>
-  </header>
-  <section>
-    <p>Bem-vindo <%- usuario.nome %></p>
+<header class="row-fluid text-center">
+  <h2>Ntalk - Agenda de contatos</h2>
+</header>
+<section class="row-fluid">
+  <section class="span12">
+    <form action="/contato" method="post" class="well form-inline">
+      <input type="text" name="contato[nome]" placeholder="Nome" />
+      <input type="text" name="contato[email]" placeholder="E-mail" />
+      <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+    <table class="table well">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>E-mail</th>
+          <th>Status</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% contatos.forEach(function(contato, index) { %>
+        <tr>
+          <td><%- contato.nome %></td>
+          <td><%- contato.email %></td>
+          <td>
+            <span id="notify_<%- contato.email %>" class="label">Offline</span>
+          </td>
+          <td>
+            <a href="/contato/<%- index %>" class="btn btn-info">Detalhes</a>
+            <a
+              href="/chat"
+              id="chat_<%- contato.email %>"
+              class="btn btn-inverse"
+              >Conversar</a
+            >
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
   </section>
-<% include ../exit %>
-<% include ../footer %>
+</section>
+<% include ../exit %> <% include ../footer %>
