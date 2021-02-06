@@ -3,7 +3,7 @@ module.exports = (app) => ({
     res.render("home/index");
   },
   login: (req, res) => {
-    const { email, nome } = req.body;
+    const { email, nome } = req.body.usuario;
 
     if (email && nome) {
       const { usuario } = req.body;
