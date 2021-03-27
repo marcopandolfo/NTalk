@@ -8,6 +8,18 @@ module.exports = (io) => {
     const { session } = client.handshake;
     const { usuario } = session;
 
+    client.set("email", usuario.email);
+
+    const onlines = sockets.clients();
+    onlines.forEach((online) => {
+      const online = sockets.sockets[online.id];
+
+      online.get("email", (err, email) => {
+        client.emit("notify-onlines", email);
+        client.broadcast.emit("notify-onlines", email);
+      });
+    });
+
     client.on("send-server", (msg) => {
       msg = "<b>" + usuario.nome + ":</b> " + msg + "<br>";
 
@@ -34,6 +46,11 @@ module.exports = (io) => {
 
     client.on("disconnect", () => {
       client.get("sala", (erro, sala) => {
+        const msg = "<b>" + usuario.nome + ":</b> saiu.<br>";
+
+        client.broadcast.emit("notify-offline", usuario.email);
+        sockets.in(sala).emit("send-client", msg);
+
         client.leave(sala);
       });
     });

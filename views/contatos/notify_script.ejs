@@ -2,9 +2,26 @@
 
 <script>
   const socket = io.connect('http://localhost:3000');
+  const notify = (data) => {
+    const id = 'notify_' + data.el;
+
+    const notify = document.getElementById(id);
+    notify.textContent = data.msg;
+  };
+
+  socket.on('notify-onlines', (email) => {
+    notify({ el: email, msg: 'Online' });
+  });
+
+  socket.on('notify-offline', (email) => {
+    notify({ el: email, msg: 'Offline' });
+  });
 
   socket.on('new-message', (data) => {
-    const chat = document.getElementById('chat_' + data.email);
+    notify({ el: data.email, msg: 'Mensagem' });
+    const id = 'chat_' + data.email;
+    const chat = document.getElementById(id);
     chat.href += '?' + data.sala;
   });
 </script>
+Com isso
