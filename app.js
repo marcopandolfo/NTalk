@@ -29,7 +29,6 @@ consign({}).include("models").then("controllers").then("routes").into(app);
 app.use(error.notFound);
 app.use(error.serverError);
 
-
 io.sockets.on("connection", (client) => {
   client.on("send-server", (data) => {
     const msg = "<b>" + data.nome + ":</b> " + data.msg + "<br>";
