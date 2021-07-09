@@ -1,7 +1,17 @@
-module.exports = (app) => ({
-  index: (req, res) => {
-    const resultado = { email: req.params.email, usuario: req.session.usuario };
+const crypto = require('crypto');
 
-    res.render("chat/index", resultado);
-  },
-});
+module.exports = (app) => {
+  const ChatController = {
+    index(req, res) {
+      const { sala } = req.query;
+      let hashDaSala = sala;
+      if (!hashDaSala) {
+        const timestamp = Date.now().toString();
+        const md5 = crypto.createHash('md5');
+        hashDaSala = md5.update(timestamp).digest('hex');
+      }
+      res.render('chat/index', { sala: hashDaSala });
+    }
+  };
+  return ChatController;
+};

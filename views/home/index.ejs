@@ -1,15 +1,16 @@
 <% include ../header %>
-<header class="row-fluid text-center">
+<header>
   <h1>Ntalk</h1>
   <h4>Bem-vindo!</h4>
 </header>
-<section class="row-fluid text-center">
+<section>
   <form action="/entrar" method="post">
-    <input type="text" name="usuario[nome]" placeholder="Digite seu nome." />
-    <br />
-    <input type="text" name="usuario[email]" placeholder="Digite seu e-mail." />
-    <br />
-    <button type="submit" class="btn btn-success">Entrar</button>
+    <input type="hidden" name="_csrf" value="<%- _csrf %>">
+    <input type="text" name="usuario[nome]" placeholder="Nome">
+    <br>
+    <input type="text" name="usuario[email]" placeholder="Email">
+    <br>
+    <button type="submit">Entrar</button>
   </form>
 </section>
 <% include ../footer %>
