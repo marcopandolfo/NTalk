@@ -19,4 +19,3 @@ O projeto consiste em uma agenda de contatos em que seus contatos serão integra
 - EJS: Template engine para implementação de html dinâmico;
 - Mocha: Framework para testes automatizados;
 - SuperTest: Módulo para emular requisições que será utilizado no teste de integração;
-- Nginx: Servidor Web de alta performance para arquivos estáticos;
